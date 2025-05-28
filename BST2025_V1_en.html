@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautySkin AI Token (BST) - RWA-Linked Hybrid Staking System Whitepaper</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            background-color: #fbfbfd;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #1a365d;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-top: 1rem;
+            color: #1a365d;
+            border-bottom: 4px solid #4c51bf;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.3rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(45deg, #4c51bf, #6b46c1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .header-decoration {
+            height: 8px;
+            background: linear-gradient(90deg, #4c51bf, #6b46c1);
+            margin-bottom: 1rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f7fafc;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-box {
+            background-color: #ebf4ff;
+            border-left: 4px solid #4c51bf;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.875rem;
+            color: #718096;
+        }
+        
+        .toc {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: #1a365d;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .toc-h2 {
+            padding-left: 1rem;
+        }
+        
+        .toc-h3 {
+            padding-left: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .solana-logo {
+            max-width: 100px;
+            margin: 0 auto;
+        }
+        
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #718096;
+            font-style: italic;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f7fafc;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-decoration"></div>
+        
+        <div class="logo-container">
+            <div class="text-center text-4xl font-bold mb-2">
+                <span class="text-gradient">BST (BeautySkin AI Token)</span>
+            </div>
+            <p class="text-center text-gray-600 mb-4">Solana-based RWA-linked Hybrid Staking System Powered by AI Agents</p>
+            <p class="text-center text-sm text-gray-500">Version 1.0 | May 2025</p>
+        </div>
+        
+        <div class="disclaimer">
+            <p><strong>Legal Notice:</strong> This whitepaper is prepared for informational purposes only and is not a legally binding document. The information contained in this document does not constitute technical, business, financial, or legal advice. Please seek professional advice before making any investment decisions. The contents of this whitepaper are subject to change during future development.</p>
+        </div>
+        
+        <div class="toc">
+            <div class="toc-title">Table of Contents</div>
+            <ul>
+                <li><a href="#executive-summary">1. Executive Summary</a></li>
+                <li><a href="#vision-mission">2. Vision and Mission</a></li>
+                <li><a href="#market-analysis">3. Market Analysis</a></li>
+                <li><a href="#problem-solution">4. Problem Definition and Solutions</a></li>
+                <li><a href="#technology">5. Technical Architecture</a></li>
+                <li><a href="#token-economy">6. Token Economy</a></li>
+                <li><a href="#staking-system">7. Hybrid Staking System</a></li>
+                <li><a href="#rwa-integration">8. K-Beauty RWA Integration Strategy</a></li>
+                <li><a href="#roadmap">9. Roadmap</a></li>
+                <li><a href="#team">10. Team & Advisors</a></li>
+                <li><a href="#legal">11. Legal Considerations and Dubai Regulatory Compliance</a></li>
+                <li><a href="#risks">12. Risk Factors</a></li>
+                <li><a href="#conclusion">13. Conclusion</a></li>
+            </ul>
+        </div>
+        
+        <section id="executive-summary">
+            <h2>1. Executive Summary</h2>
+            <p>The modern financial system is rapidly evolving towards digitalization and decentralization. Decentralized Finance (DeFi) stands at the forefront of this transformation, redefining traditional financial services. BeautySkin AI Token (BST) presents a new paradigm that links these digital financial innovations with real-world assets.</p>
+            
+            <p>BeautySkin AI is a token based on the Solana blockchain, featuring Real World Asset (RWA) elements directly linked to real-world businesses through online and offline beauty lounges. This approach combines the technical advantages of digital assets with the stability of the real economy.</p>
+            
+            <p>Particularly, BST (BeautySkin AI) introduces a unique hybrid staking system that provides investors with a differentiated reward structure. This system offers high reward rates ranging from 0.1% to 1.0% daily based on staking periods, while enhancing token value stability through real-time liquidity provision with USDT.</p>
+            
+            <p>This project is based on the global cryptocurrency regulatory environment and plans to provide enhanced financial services through strategic partnerships with global banks within one year. Through this approach, we aim to bridge the gap between digital assets and traditional finance, establishing a new model that applies blockchain technology benefits to daily life.</p>
+        </section>
+        
+        <section id="vision-mission">
+            <h2>2. Vision and Mission</h2>
+            
+            <div class="card">
+                <h3>Vision</h3>
+                <p>"Breaking down the boundaries between the real economy and digital finance to build a new value exchange ecosystem accessible to everyone."</p>
+            </div>
+            
+            <h3>Mission</h3>
+            <ul>
+                <li><strong>Enhanced Accessibility:</strong> Building a digital asset ecosystem that can be actually used in real businesses like beauty lounges</li>
+                <li><strong>Value Stability:</strong> Stabilizing token value through real-time liquidity staking with USDT</li>
+                <li><strong>Innovative Reward System:</strong> Providing greater benefits to long-term participants through tiered rewards based on staking periods</li>
+                <li><strong>Financial Inclusion:</strong> Offering new financial opportunities to users marginalized by traditional financial systems</li>
+                <li><strong>Regulatory Compliance and Trust:</strong> Ensuring legal and transparent operations within the global regulatory environment</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p class="font-bold">Core Value Proposition</p>
+                <p>BST (BeautySkin AI Token) combines Solana blockchain's technical excellence with the real value of the beauty industry, creating cases where digital assets are actually used in the real world. Through this, we accelerate the mass adoption of blockchain technology and present a new digital economy model that provides direct benefits to daily life.</p>
+            </div>
+        </section>
+        
+        <section id="market-analysis">
+            <h2>3. Market Analysis</h2>
+            
+            <h3>3.1 Global DeFi Market Status</h3>
+            <p>The DeFi market has experienced explosive growth over the past few years. Starting from approximately $1 billion in early 2020, it has now evolved into a market worth hundreds of billions of dollars. This rapid growth is evidence that users are seeking alternatives to centralized financial systems.</p>
+            
+            <h3>3.2 The Rise of the RWA (Real World Assets) Market</h3>
+            <p>The RWA market, which tokenizes real-world assets on the blockchain, is attracting attention as DeFi's next growth engine. Major financial institutions like BlackRock and JP Morgan are also entering this market, and the RWA market is expected to grow to $4-30 trillion by 2030.</p>
+            
+            <h3>3.3 Global Influence of the K-Beauty Industry</h3>
+            <p>K-Beauty forms a global market of approximately $10 billion, showing an annual growth rate of over 10%. Korean cosmetics and beauty products receive high ratings from global consumers in terms of quality, innovation, and value for money, potentially creating significant synergy effects when linked with blockchain technology.</p>
+            
+            <h3>3.4 Growth of the Solana Ecosystem</h3>
+            <p>Solana has established itself as an ideal platform for DeFi applications with high throughput (65,000 transactions per second) and low transaction fees. The infrastructure for NFT and RWA projects is developing rapidly, providing an optimal environment for real asset-linked projects like BST (BeautySkin AI Token).</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Market Sector</th>
+                            <th>Current Size</th>
+                            <th>Expected Growth Rate</th>
+                            <th>Key Trends</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Global DeFi</td>
+                            <td>Over $100 billion</td>
+                            <td>40%+ annually</td>
+                            <td>Shift from yield farming to real asset integration</td>
+                        </tr>
+                        <tr>
+                            <td>RWA Tokenization</td>
+                            <td>$5 billion</td>
+                            <td>70%+ annually</td>
+                            <td>Expanding institutional participation, evolving regulatory frameworks</td>
+                        </tr>
+                        <tr>
+                            <td>K-Beauty Industry</td>
+                            <td>$10 billion</td>
+                            <td>10%+ annually</td>
+                            <td>Global market expansion, digital channel growth</td>
+                        </tr>
+                        <tr>
+                            <td>Solana Ecosystem</td>
+                            <td>$15 billion TVL</td>
+                            <td>60%+ annually</td>
+                            <td>Increased developer activity, expanded institutional investment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section id="problem-solution">
+            <h2>4. Problem Definition and Solutions</h2>
+            
+            <h3>4.1 Current Cryptocurrency Market Problems</h3>
+            
+            <div class="card">
+                <h4>Lack of Practical Utility</h4>
+                <p>Most cryptocurrencies lack real-world utility and are perceived merely as speculative assets.</p>
+            </div>
+            
+            <div class="card">
+                <h4>High Volatility</h4>
+                <p>The extreme price volatility of the cryptocurrency market is a major obstacle preventing general users and businesses from utilizing digital assets in daily life.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Limited Staking Models</h4>
+                <p>Existing staking systems have high barriers to entry due to low reward rates and complex participation methods, failing to provide sufficient incentives for long-term holding.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Disconnection from Real Economy</h4>
+                <p>Many DeFi projects operate only within the cryptocurrency ecosystem, lacking connection to the real economy.</p>
+            </div>
+            
+            <h3>4.2 BST (BeautySkin AI)'s Innovative Solutions</h3>
+            
+            <div class="card">
+                <h4>Real Payment Method for Online & Offline Beauty Lounges</h4>
+                <p>BST (BeautySkin AI) tokens can be used as actual payment methods in online/offline beauty lounges, ensuring the token's practical utility. Plans to gradually expand to related industries.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Real-time Liquidity Staking with USDT</h4>
+                <p>Enhances price stability and reduces volatility through a staking method that provides BeautySkin AI and USDT to liquidity pools at real-time ratios.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Tiered High-Yield Staking</h4>
+                <p>Provides differentiated high reward rates from 0.1% to 1.0% daily based on staking periods, offering greater benefits to long-term participants.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Bank Partnership Strategy</h4>
+                <p>Strengthens token stability and secures connectivity with traditional financial systems through strategic partnerships with Dubai banks within one year.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <p class="font-bold">Key Differentiator: RWA-based Hybrid Staking</p>
+                <p>BeautySkin AI Token's greatest innovation is the combination of RWA elements directly linked to real businesses (K-Beauty lounges) with a high-yield hybrid staking system. This presents a new paradigm that provides both the technical advantages of digital assets and the stability of the real economy.</p>
+            </div>
+        </section>
+        
+        <section id="technology">
+            <h2>5. Technical Architecture</h2>
+            
+            <h3>5.1 Solana Blockchain Foundation</h3>
+            <p>BST (BeautySkin AI Token) selected Solana blockchain as its technical foundation for the following reasons:</p>
+            <ul>
+                <li><strong>High Performance:</strong> Processing capacity of up to 65,000 transactions per second (TPS)</li>
+                <li><strong>Low Cost:</strong> Very low transaction fees averaging $0.00025</li>
+                <li><strong>Sustainability:</strong> Energy-efficient Proof of Stake (PoS) consensus mechanism</li>
+                <li><strong>Development Ecosystem:</strong> Strong development environment based on Rust language</li>
+                <li><strong>Decentralization:</strong> Decentralized network composed of over 2,000 validator nodes</li>
+                <li><strong>AI Scalability:</strong> AI agent-friendly and scalable decentralized network</li>
+            </ul>
+            
+            <h3>5.2 Token Standard and Structure</h3>
+            <p>BST (BeautySkin AI) follows Solana's SPL token standard with the following characteristics:</p>
+            <ul>
+                <li>Token Name: BeautySkin AI Token</li>
+                <li>Token Symbol: BST</li>
+                <li>Decimals: 9 (Solana standard)</li>
+                <li>Total Supply: 10 billion BST</li>
+                <li>Smart Contract Audit: CertiK, Kudelski Security</li>
+            </ul>
+            
+            <h3>5.3 Hybrid Staking Technical Implementation</h3>
+            <p>BeautySkin AI's hybrid staking system will be implemented sequentially and realized through Solana's programs (smart contracts) after listing, including the following core technical elements:</p>
+            <ul>
+                <li><strong>Liquidity Pool Management:</strong> Automated BST-USDT real-time liquidity pool management</li>
+                <li><strong>Time-based Reward Engine:</strong> Differential reward calculation based on staking periods</li>
+                <li><strong>Automatic Compound Mechanism:</strong> Automatic reinvestment option for staking rewards</li>
+                <li><strong>Token Lock-up System:</strong> One-year principal lock-up and conditional early withdrawal features</li>
+                <li><strong>On-chain Governance:</strong> Token holder voting system for major protocol parameters</li>
+            </ul>
+            
+            <h3>5.4 Online & Offline Beauty Lounge Payment Integration</h3>
+            <p>BST (BeautySkin AI) integrates with beauty lounge payment systems through the following technologies:</p>
+            <ul>
+                <li><strong>QR Code Payment:</strong> QR code payment system based on Solana Pay</li>
+                <li><strong>Mobile Wallet Integration:</strong> Easy integration with major Solana wallets</li>
+                <li><strong>Real-time Exchange Rate Application:</strong> Automatic application of market exchange rates at payment time</li>
+                <li><strong>Reward Point System:</strong> Additional reward points when using BST</li>
+                <li><strong>Off-chain Processing:</strong> Off-chain processing options for fast transactions</li>
+            </ul>
+            
+            <h3>5.5 Security Architecture</h3>
+            <p>The BST (BeautySkin AI) project implements the following multi-layered security architecture:</p>
+            <ul>
+                <li><strong>Multi-signature Management:</strong> Multi-signature required for all protocol updates</li>
+                <li><strong>Timelock Mechanism:</strong> 48-hour waiting period for major parameter changes</li>
+                <li><strong>Regular Security Audits:</strong> Quarterly independent external security audits</li>
+                <li><strong>Bug Bounty Program:</strong> Rewards for discovering security vulnerabilities</li>
+                <li><strong>Insurance Fund:</strong> Fund operation to compensate for potential losses due to hacks or bugs</li>
+            </ul>
+        </section>
+        
+        <section id="token-economy">
+            <h2>6. Token Economy</h2>
+            
+            <h3>6.1 Token Overview</h3>
+            <div class="card">
+                <p><strong>Token Name:</strong> BeautySkin AI Token</p>
+                <p><strong>Ticker:</strong> BST</p>
+                <p><strong>Total Supply:</strong> 10 billion BST</p>
+                <p><strong>Platform:</strong> Solana</p>
+                <p><strong>Token Standard:</strong> SPL Token</p>
+                <p><strong>Issuance Method:</strong> Pre-minted</p>
+            </div>
+            
+            <h3>6.2 Token Distribution</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Percentage</th>
+                            <th>Lock-up and Vesting Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ecosystem Development & Maintenance</td>
+                            <td>30%</td>
+                            <td>6-month initial lock-up, then quarterly linear release over 10 years</td>
+                        </tr>
+                        <tr>
+                            <td>Team & Advisors</td>
+                            <td>15%</td>
+                            <td>3-month initial lock-up, then monthly linear release over 3 years</td>
+                        </tr>
+                        <tr>
+                            <td>Staking Rewards</td>
+                            <td>20%</td>
+                            <td>Gradual release according to algorithm after 3 months</td>
+                        </tr>
+                        <tr>
+                            <td>Early Investors</td>
+                            <td>5%</td>
+                            <td>Release after 1, 2, 3 month lock-up periods</td>
+                        </tr>
+                        <tr>
+                            <td>Strategic Partnerships</td>
+                            <td>8%</td>
+                            <td>Customized lock-up applied per case</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing & Community</td>
+                            <td>7%</td>
+                            <td>3-month lock-up, then monthly release over 2 years</td>
+                        </tr>
+                        <tr>
+                            <td>Liquidity Staking Provision</td>
+                            <td>10%</td>
+                            <td>For liquidity supply immediately before exchange listing</td>
+                        </tr>
+                        <tr>
+                            <td>Airdrops & Early User Incentives</td>
+                            <td>5%</td>
+                            <td>Gradual distribution over 12 months after launch</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>6.3 Token Utility</h3>
+            <ul>
+                <li><strong>Beauty Lounge Payment:</strong> Direct payment method in online/offline beauty lounges</li>
+                <li><strong>Staking Participation:</strong> Participation in staking system through real-time liquidity provision with USDT</li>
+                <li><strong>Governance:</strong> Voting rights on Protocol Improvement Proposals (PIP)</li>
+                <li><strong>Fee Discounts:</strong> Discount benefits for services and product purchases in beauty lounges</li>
+                <li><strong>Membership Benefits:</strong> Tiered VIP benefits and exclusive service access based on holdings</li>
+                <li><strong>Community Participation:</strong> Eligibility for online and offline community activities</li>
+            </ul>
+            
+            <h3>6.4 Token Value Assurance Mechanisms</h3>
+            <div class="card">
+                <h4>USDT Real-time Liquidity Staking</h4>
+                <p>Staking is conducted by providing BST tokens and USDT to liquidity pools at real-time ratios, ensuring token price stability.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Token Buyback and Burn</h4>
+                <p>10% of beauty lounge and Beauty AI revenue is used to regularly purchase BST tokens and AI agent marketing coins from the market, with BST being burned to reduce circulating supply.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Real Business Connection</h4>
+                <p>Direct connection with real businesses such as beauty lounges and Beauty AI provides actual utility and value to the token.</p>
+            </div>
+            
+            <div class="card">
+                <h4>Bank Partnership</h4>
+                <p>Strategic partnerships with globally located banks within one year will strengthen the token's institutional recognition and stability.</p>
+            </div>
+        </section>
+        
+        <section id="staking-system">
+            <h2>7. Hybrid Staking System</h2>
+            
+            <div class="highlight-box">
+                <p class="font-bold">BeautySkin AI (BST)'s Differentiated Hybrid Staking System</p>
+                <p>BST (BeautySkin AI) introduces an innovative hybrid staking system that provides both high reward rates and value stability. This system is based on real-time liquidity provision with USDT and offers differentiated high-yield rewards based on staking periods.</p>
+            </div>
+            
+            <h3>7.1 Staking Structure</h3>
+            <p>BeautySkin AI's staking is structured as follows:</p>
+            <ul>
+                <li><strong>Basic Requirements:</strong> Provide BST coins and USDT to liquidity pool at real-time ratios</li>
+                <li><strong>Minimum Staking Amount:</strong> Real-time ratio BST + 100 USDT</li>
+                <li><strong>Principal Lock-up Period:</strong> 1 year (penalties apply for early withdrawal)</li>
+                <li><strong>Reward Payment Cycle:</strong> Daily automatic payment</li>
+                <li><strong>Reward Form:</strong> BST tokens</li>
+            </ul>
+            
+            <h3>7.2 Tiered Reward System</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Staking Model</th>
+                            <th>Conditions</th>
+                            <th>Daily Reward Rate</th>
+                            <th>Annual Percentage Yield (APY)</th>
+                            <th>Reward Start Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic</td>
+                            <td>1 month staking</td>
+                            <td>0.1%~0.2%</td>
+                            <td>~73%</td>
+                            <td>After 1 month</td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td>2 months staking</td>
+                            <td>0.3%~0.4%</td>
+                            <td>~146%</td>
+                            <td>After 2 months</td>
+                        </tr>
+                        <tr>
+                            <td>Elite</td>
+                            <td>3 months staking</td>
+                            <td>0.5%~1.0%</td>
+                            <td>~365%</td>
+                            <td>After 3 months</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">* APY is annualized yield including compound interest effects and may vary depending on market conditions.</p>
+            
+            <h3>7.3 Hybrid Staking Process</h3>
+            <ol>
+                <li><strong>Liquidity Provision:</strong> Deposit BST and USDT into liquidity pool at real-time ratios</li>
+                <li><strong>Staking Model Selection:</strong> Choose between Basic (3 months), Premium (6 months), or Elite (12 months)</li>
+                <li><strong>Waiting Period:</strong> First-come, first-served basis limited by soft cap for selected model</li>
+                <li><strong>Reward Payment:</strong> Daily automatic reward payment begins after hybrid staking</li>
+                <li><strong>Compound Option:</strong> Re-staking available through automatic reinvestment</li>
+                <li><strong>Principal Release:</strong> Principal lock-up release and withdrawal available after model selection staking</li>
+            </ol>
+            
+            <h3>7.4 Early Withdrawal and Penalties</h3>
+            <p>If funds are withdrawn before the 1-year principal lock-up period, the following penalties apply:</p>
+            <ul>
+                <li>1-3 months after staking: 30% penalty on principal and interest</li>
+                <li>4-6 months after staking: 20% penalty on principal and interest</li>
+                <li>7-9 months after staking: 10% penalty on principal and interest</li>
+                <li>10-12 months after staking: 5% penalty on principal and interest</li>
+            </ul>
+            <p>Funds collected through penalties are used as an insurance fund to strengthen protocol stability.</p>
+            
+            <h3>7.5 Staking Security and Risk Management</h3>
+            <p>BST (BeautySkin AI)'s staking system implements the following security measures and risk management strategies:</p>
+            <ul>
+                <li><strong>Smart Contract Audit:</strong> Double audit by CertiK and Kudelski Security</li>
+                <li><strong>Multi-signature Control:
