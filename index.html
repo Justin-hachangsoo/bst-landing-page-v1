@@ -32,12 +32,15 @@
         </ul>
       </nav>
       <!--수정 완료-->
-
-      <div class="flex items-center space-x-2 text-sm sm:space-x-2 sm:text-base">
-        <span class="lang-btn" id="btn-ko">한국어</span>
-        <span class="lang-btn" id="btn-en">English</span>
-        <i class="fas fa-globe"></i>
+      <!--수정 코드-->
+      <div class="relative">
+        <i id="lang-toggle" class="fas fa-globe text-xl cursor-pointer"></i>
+        <div id="lang-menu" class="absolute right-0 mt-2 bg-white border rounded shadow-lg hidden">
+          <button id="lang-ko" class="block w-full px-4 py-2 text-left hover:bg-gray-100">KOR</button>
+          <button id="lang-en" class="block w-full px-4 py-2 text-left hover:bg-gray-100">ENG</button>
+        </div>
       </div>
+      <!--수정 완료-->
     </div>
     <div class="header-divider"></div>
   </header>
@@ -133,13 +136,11 @@
       document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
       document.body.dataset.lang = lang;
       // update buttons
-      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+     
       // apply translations
       const t = translations[lang];
       document.getElementById('nav-wallet').innerText = t.navWallet;
       document.getElementById('nav-whitepaper').innerText = t.navWhitepaper;
-      document.getElementById('nav-explorer').innerText = t.navExplorer;
       document.getElementById('hero-subtitle').innerText = t.heroSubtitle;
       document.getElementById('connect-btn').innerText = t.connectBtn;
       document.getElementById('btn-view-whitepaper').innerText = t.viewWhitepaper;
@@ -153,13 +154,30 @@
       const wpFrame = document.getElementById('wp-frame');
       wpFrame.src = lang === 'en' ? 'BST2025_V1_en.html' : 'BST2025_V1.html';
     }
-    <!--기존 코드--> 
-     document.getElementById('btn-ko').addEventListener('click', () => setLanguage('ko'));
-     document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
-    <!--기존 코드-->
     <!--수정 코드 모바일 언어 버튼-->
-     document.getElementById('m-btn-ko').addEventListener('click', () => setLanguage('ko'));
-     document.getElementById('m-btn-en').addEventListener('click', () => setLanguage('en'));
+    // 🌐 드롭다운 토글
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu   = document.getElementById('lang-menu');
+
+    langToggle.addEventListener('click', () => { 
+    langMenu.classList.toggle('hidden');
+    });
+
+    // 드롭다운 내 버튼으로 언어 전환
+    document.getElementById('lang-ko').addEventListener('click', () => {
+    setLanguage('ko');
+    langMenu.classList.add('hidden');
+    });
+    document.getElementById('lang-en').addEventListener('click', () => {
+    setLanguage('en');
+    langMenu.classList.add('hidden');
+    });
+     // 메뉴 바깥 클릭 시 드롭다운 닫기 (선택 사항)
+    document.addEventListener('click', e => {
+    if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
+    langMenu.classList.add('hidden');
+    }
+    });
     <!--수정 코드 끝-->
 
     // initial language from localStorage or default
