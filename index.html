@@ -21,15 +21,14 @@
     <div class="container mx-auto flex items-center justify-between p-4">
       <div class="flex items-center space-x-4">
         <img src="BST-logo2025.png" alt="BST Logo" class="h-10 w-10" />
-        <span id="site-title" class="font-bold text-xl">BST Token</span>
+        <span id="site-title" class="font-bold text-xl">BST</span>
       </div>
       
       <!--수정 코드-->
        <nav>
         <ul class="flex flex-wrap justify-center space-x-4 text-sm sm:space-x-6 sm:text-base">
-          <li><a href="#wallet" id="nav-wallet" class="hover:text-indigo-600">지갑 연결</a></li>
+          <li><a href="#wallet" id="nav-wallet" class="hover:text-indigo-600">지갑</a></li>
           <li><a href="#whitepaper" id="nav-whitepaper" class="hover:text-indigo-600">백서</a></li>
-          <li><a href="#explorer" id="nav-explorer" class="hover:text-indigo-600">Explorer</a></li>
         </ul>
       </nav>
       <!--수정 완료-->
@@ -154,9 +153,15 @@
       const wpFrame = document.getElementById('wp-frame');
       wpFrame.src = lang === 'en' ? 'BST2025_V1_en.html' : 'BST2025_V1.html';
     }
+    <!--기존 코드--> 
+     document.getElementById('btn-ko').addEventListener('click', () => setLanguage('ko'));
+     document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
+    <!--기존 코드-->
+    <!--수정 코드 모바일 언어 버튼-->
+     document.getElementById('m-btn-ko').addEventListener('click', () => setLanguage('ko'));
+     document.getElementById('m-btn-en').addEventListener('click', () => setLanguage('en'));
+    <!--수정 코드 끝-->
 
-    document.getElementById('btn-ko').addEventListener('click', () => setLanguage('ko'));
-    document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
     // initial language from localStorage or default
     const initialLang = localStorage.getItem('lang') || 'ko';
     setLanguage(initialLang);
