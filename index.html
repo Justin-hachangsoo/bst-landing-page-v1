@@ -8,27 +8,74 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <!-- FontAwesome for icons -->
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet" />
+  
   <style>
     .header-divider { height: 4px; background: linear-gradient(90deg, #4c51bf, #6b46c1); }
     .hero-bg { background: linear-gradient(135deg, #eab308 0%, #facc15 100%); }
     .lang-btn { cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
     .lang-btn.active { background-color: rgba(255,255,255,0.2); }
+    
+    /* 📍 핵심 해결책: CSS로 초기 위치 고정 */
+    html {
+      overflow-anchor: none;
+      scroll-behavior: auto !important;
+      /* 처음부터 스크롤을 최상단에 고정 */
+      scroll-padding-top: 0;
+    }
+    body {
+      overflow-anchor: none;
+      /* 페이지 로딩 중 스크롤 방지 */
+      overflow-x: hidden;
+    }
+    
+    /* 🚀 깜빡임 방지: 페이지 로딩 중 투명도 조절 */
+    body.loading {
+      opacity: 0;
+      transition: opacity 0.1s ease-in;
+    }
+    body.loaded {
+      opacity: 1;
+    }
   </style>
+  
+  <script>
+    // 🔧 1단계: 브라우저 스크롤 복원 완전 차단
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // 🔧 2단계: 페이지 로딩 시작 즉시 최상단 고정
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    
+    // 🔧 3단계: DOM이 준비되기 전에 실행되는 즉시 함수
+    (function() {
+      // 페이지 로드 시작과 동시에 스크롤 위치 고정
+      if (document.readyState === 'loading') {
+        window.scrollTo(0, 0);
+      }
+    })();
+  </script>
+  
 </head>
-<body class="bg-white text-gray-800" data-lang="ko">
+  
+<body id="top" class="bg-white text-gray-800 loading" data-lang="ko">  
   <!-- Header -->
   <header class="sticky top-0 bg-white shadow z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
-      <div class="flex items-center space-x-4">
+     <div class="flex items-center space-x-4">
+      <!-- 클릭 시 최상단( id="top" )으로 스크롤 -->
+      <a href="#top" class="flex items-center space-x-2">
         <img src="BST-logo2025.png" alt="BST Logo" class="h-10 w-10" />
         <span id="site-title" class="font-bold text-xl">BST</span>
-      </div>
+      </a>
+     </div>
       
       <!--수정 코드-->
        <nav>
         <ul class="flex flex-wrap justify-center space-x-4 text-sm sm:space-x-6 sm:text-base">
-          <li><a href="#wallet" id="nav-wallet" class="hover:text-indigo-600">지갑</a></li>
-          <li><a href="#whitepaper" id="nav-whitepaper" class="hover:text-indigo-600">백서</a></li>
+           <li><a href="#wallet" id="nav-wallet" class="font-bold hover:text-indigo-600">지갑</a></li>
+           <li><a href="#whitepaper" id="nav-whitepaper" class="font-bold hover:text-indigo-600">백서</a></li>
         </ul>
       </nav>
       <!--수정 완료-->
@@ -98,14 +145,52 @@
       </div>
     </div>
   </footer>
-
-  <!-- Translations & Language Script -->
+  
   <script>
+    // 🎯 핵심 해결책: 페이지 로딩과 동시에 실행
+    (function() {
+      // 즉시 최상단 고정
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      
+      // DOM 준비 완료 시 페이지 표시
+      function showPage() {
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
+        // 한 번 더 확실히 최상단 고정
+        window.scrollTo(0, 0);
+      }
+      
+      // DOM이 이미 준비되었다면 즉시 실행
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showPage);
+      } else {
+        showPage();
+      }
+    })();
+
+    // 🔒 추가 보안: 스크롤 이벤트 감지 시 최상단 유지 (처음 로딩 시에만)
+    let initialLoadComplete = false;
+    
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        initialLoadComplete = true;
+      }, 500); // 0.5초 후 자유 스크롤 허용
+    });
+    
+    // 🛡️ 초기 로딩 중에는 스크롤 방지
+    window.addEventListener('scroll', function() {
+      if (!initialLoadComplete && window.scrollY > 0) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    // (1) 언어별 텍스트사전
     const translations = {
       ko: {
         navWallet: '지갑 연결',
         navWhitepaper: '백서',
-        navExplorer: 'Explorer',
         heroSubtitle: 'Solana 기반 RWA 연계 하이브리드 스테이킹 시스템으로, 실물 K-Beauty 비즈니스와 연결된 혁신적인 디지털 자산.',
         connectBtn: '지갑 연결',
         viewWhitepaper: '백서 보기',
@@ -119,7 +204,6 @@
       en: {
         navWallet: 'Connect Wallet',
         navWhitepaper: 'Whitepaper',
-        navExplorer: 'Explorer',
         heroSubtitle: 'Solana-based RWA-linked hybrid staking system, an innovative digital asset connecting real-world K-Beauty business.',
         connectBtn: 'Connect Wallet',
         viewWhitepaper: 'View Whitepaper',
@@ -131,65 +215,57 @@
         footerText: '© 2025 BeautySkin ai Token. All rights reserved.'
       }
     };
-
+    
+    // (2) 언어 전환 함수
     function setLanguage(lang) {
       document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
       document.body.dataset.lang = lang;
-      // update buttons
-     
-      // apply translations
       const t = translations[lang];
-      document.getElementById('nav-wallet').innerText = t.navWallet;
-      document.getElementById('nav-whitepaper').innerText = t.navWhitepaper;
-      document.getElementById('hero-subtitle').innerText = t.heroSubtitle;
-      document.getElementById('connect-btn').innerText = t.connectBtn;
+      document.getElementById('nav-wallet').innerText       = t.navWallet;
+      document.getElementById('nav-whitepaper').innerText   = t.navWhitepaper;
+      document.getElementById('hero-subtitle').innerText    = t.heroSubtitle;
+      document.getElementById('connect-btn').innerText      = t.connectBtn;
       document.getElementById('btn-view-whitepaper').innerText = t.viewWhitepaper;
       document.getElementById('sec-wallet-title').innerText = t.secWalletTitle;
-      document.getElementById('sec-wallet-desc').innerText = t.secWalletDesc;
-      document.getElementById('wallet-connect').innerText = t.walletConnect;
+      document.getElementById('sec-wallet-desc').innerText  = t.secWalletDesc;
+      document.getElementById('wallet-connect').innerText   = t.walletConnect;
       document.getElementById('sec-whitepaper-title').innerText = t.secWhitepaperTitle;
-      document.getElementById('sec-explorer-title').innerText = t.secExplorerTitle;
-      document.getElementById('footer-text').innerText = t.footerText;
-      // swap whitepaper iframe
-      const wpFrame = document.getElementById('wp-frame');
-      wpFrame.src = lang === 'en' ? 'BST2025_V1_en.html' : 'BST2025_V1.html';
+      document.getElementById('sec-explorer-title').innerText   = t.secExplorerTitle;
+      document.getElementById('footer-text').innerText      = t.footerText;
+      document.getElementById('wp-frame').src               = lang === 'en'
+        ? 'BST2025_V1_en.html'
+        : 'BST2025_V1.html';
     }
-    <!--수정 코드 모바일 언어 버튼-->
-    // 🌐 드롭다운 토글
+    
+    // (3) 🌐 드롭다운 토글 & 언어 선택
     const langToggle = document.getElementById('lang-toggle');
     const langMenu   = document.getElementById('lang-menu');
-
-    langToggle.addEventListener('click', () => { 
-    langMenu.classList.toggle('hidden');
+    langToggle.addEventListener('click', () => {
+      langMenu.classList.toggle('hidden');
     });
-
-    // 드롭다운 내 버튼으로 언어 전환
     document.getElementById('lang-ko').addEventListener('click', () => {
-    setLanguage('ko');
-    langMenu.classList.add('hidden');
+      setLanguage('ko');
+      langMenu.classList.add('hidden');
     });
     document.getElementById('lang-en').addEventListener('click', () => {
-    setLanguage('en');
-    langMenu.classList.add('hidden');
+      setLanguage('en');
+      langMenu.classList.add('hidden');
     });
-     // 메뉴 바깥 클릭 시 드롭다운 닫기 (선택 사항)
     document.addEventListener('click', e => {
-    if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
-    langMenu.classList.add('hidden');
-    }
+      if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.add('hidden');
+      }
     });
-    <!--수정 코드 끝-->
-
-    // initial language from localStorage or default
+    
+    // (4) 초기 언어 읽어오기 (localStorage)
     const initialLang = localStorage.getItem('lang') || 'ko';
     setLanguage(initialLang);
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('lang', document.body.dataset.lang);
     });
-
-    // Phantom Wallet 연결 예시 (unchanged)
-    const connectWalletBtn = document.getElementById('wallet-connect');
-    connectWalletBtn.addEventListener('click', async () => {
+    
+    // (5) Phantom Wallet 연결 버튼
+    document.getElementById('wallet-connect').addEventListener('click', async () => {
       if (window.solana && window.solana.isPhantom) {
         try {
           const resp = await window.solana.connect();
