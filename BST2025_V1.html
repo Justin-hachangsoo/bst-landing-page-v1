@@ -1,1 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BST (Beauty AI Token) Technical Whitepaper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #ffffff;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 30px 0;
+            border-bottom: 2px solid #000;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .header .version {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .section {
+            margin: 40px 0;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #222;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            margin: 20px 0 12px 0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 12px 0 12px 30px;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .table-container {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .metrics-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .metric-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fafafa;
+        }
+
+        .metric-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-table {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>BST (Beauty Skin AI Token)</h1>
+        <div class="subtitle">Technical Whitepaper</div>
+        <div class="subtitle">Beauty Ai Agent 프로토콜 & 뉴 노멀 RWA 금융 연계 로드맵</div>
+        <div class="version">Version 1.0 | June 2025</div>
+    </div>
+
+    <section class="section">
+        <h2>1. Abstract</h2>
+        <p>
+            Beauty AI Protocol은 Ai Agent가 대화형 인터페이스 기반으로 LLM위에서 구동되도록 작용되며, 딥러닝을 통하여
+            사용자에게는 맞춤형 Beauty 서비스를 제공되며 장기적으로는 AGI 서비스를 실현하게 됩니다.
+            Ai Skin Protocol통하여 각기 다른 피부 타입을 집중 분석된 딥러닝을 통하여 궁긍적으로는 최적의 맞춤형 피부케어를
+            서비스를 제공할것입니다
+            Wep3.0 블록체인 인프라 확장을 위한 Ai DeFi Protocol을 통하여 뉴 노멀 시대의 혁신적인 RWA 생태계를 확장하며
+            소외 받지 않고 Wep3.0기술을 쉽게 활용하게 됩니다
+            Solana 기반으로 높은 처리량과 낮은 수수료가 가능하며, 2025년 Q3 1차 ICO가 확정 되었고 이후 순차적으로 상장이
+            계획되어 있으며, BST생태계 안에 On Line, Off Line 쇼핑몰을 통하여 더욱 가깝게 RWA를 경험하게 될것입니다.
+            총 100억 개의 BST 토큰이 발행되었으며, 2025년 Q3 글로벌 거래소 상장과 함께 Softcap Staking으로 단 5억개만이
+            풀리게 됩니다.
+            BST토큰은 글로벌 상장과 함께 순차적으로 리퀴드 스테이킹, 하이브리드 스테이킹을 통하여 시장에 확대되고 공급됩니다.
+        </p>
+        <div class="metrics-table">
+            <div class="metric-item">
+                <div class="metric-label">총 토큰 공급량</div>
+                <div class="metric-value">10,000,000,000 BST</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Softcap 기간</div>
+                <div class="metric-value">500,000,000 BST</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">Softcap 목표금액</div>
+                <div class="metric-value">3,500,000 USDT</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-label">DEX 상장 계획</div>
+                <div class="metric-value">2025 Q3</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>2. Introduction</h2>
+        <h3>2.1 Market Opportunity</h3>
+        <p>
+            BST는 세가지의 핵심 가치를 가지고 관련 생태계를 확장할것입니다
+            첫째, 모든 사람들의 피부를 분석 Ai agent Beauty Care Serivce제공한다
+            둘째, Wep3.0 기반 뉴 노멀 금융 Service로 소외 받는 사람들이 없도록 제공한다
+            세째, Beauty Life를 위한 지구 살리기 위해 투자한다.
+
+            Ai agent기술을 통한 사용자 친화적 인터페이스를 통하여 모든것이 가능하고,
+            보다 많은 사용자가 Beauty서비스와 DeFi에 쉽게 접근하도록 지원합니다.
+            뉴 노멀 시대에 맞춰 쉽고 혁신적인 BST생태계 안에서는 소외 받는 지역도 사람도
+            더이상 나오지 않는 생태계를 지향하며 Beauty Life를 위한 지구의 환경문제에도
+            진심을 다하는 프로젝트 입니다.
+        </p>
+        <h3>2.2 Core Innovation</h3>
+        <ul>
+            <li>Solana 기반 SPL 토큰으로 높은 처리량 및 낮은 수수료 제공</li>
+            <li>Soft cap season, 1~3개월 Basic staking 기반 차등 보상 시스템</li>
+            <li>순차적인 ICO, Liquid Staking 및 Hybrid Staking을 통한 유동성 확보</li>
+            <li>LLM기반 위에 Ai Agent protocol을 통한 딥러닝은 AGI 서비스를 실현 </li>
+            <li>On-Chain, Off-Chain Shop의 BST만의 현실적인 생태계</li>
+            <li>글로벌 금융과 협력을 통한 RWA시장의 안정적 확대</li>
+        </ul>
+        <h3>2.3 Target Market</h3>
+        <p>• Beauty Care에 관심있는 모든 사람</p>
+        <p>• DeFi 신규 사용자 및 전통 금융 고객에 소외된 사람</p>
+        <p>• Beauty Life와 깨끗하고 아름다운 지구에 진심을 가진 사람</p>
+    </section>
+
+    <section class="section">
+        <h2>3. Technical Architecture</h2>
+        <h3>3.1 Solana 기반 아키텍처</h3>
+        <p>
+            BST는 RWA를 지향하며, Solana 네트워크 위에 SPL 토큰으로 발행되어, 낮은 트랜잭션 비용과 빠른 속도를 제공합니다. 주요 컴포넌트는 다음과 같습니다:
+        </p>
+        <ul>
+            <li><strong>BST Token Program:</strong> SPL 토큰 발행 및 관리</li>
+            <li><strong>Staking Vault Program:</strong> 락업별 스테이킹 풀 운영</li>
+            <li><strong>Governance Program:</strong> 온체인 투표 및 제안 시스템</li>
+            <li><strong>Yield Strategy Program:</strong> 자동 수익 최적화 알고리즘</li>
+            <li><strong>Banking Bridge Program:</strong> 전통 금융 연계 인터페이스</li>
+        </ul>
+
+        <h3>3.2 Master LLM 통합 기술</h3>
+        <p>
+            오프체인에서 LLM 모델이 자연어 명령을 처리하고, Solana 프로그램에 안전하게 명령을 전달합니다.
+            <em>“사용자 입력 → LLM 파싱 → 의도 분석 → Solana 트랜잭션 생성 → 프로그램 호출 → 결과 반환”</em>
+        </p>
+
+        <h3>3.3 Single-Chain Focus</h3>
+        <p>
+            현재 프로토콜은 Solana 네트워크에 집중하여 배포되며, 멀티체인 지원은 후속 로드맵에 포함됩니다.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>4. Tokenomics</h2>
+        <p>
+            가치있는 DAO거버넌스를 위하여 BST는 On·Off체인에서 소각이 됩니다.
+        </p>
+        <h3>4.1 Token Distribution</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>배정 카테고리</th>
+                    <th>할당량</th>
+                    <th>비율</th>
+                    <th>락업/베스팅</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Softcap Season</td>
+                    <td>500,000,000 BST</td>
+                    <td>5% / 0.1%~0.3%(Daily interest)</td>
+                    <td>Softcap 보상 후 Vesting(옵션별 일별 보상)</td>
+                </tr>
+                <tr>
+                    <td>리퀴드 풀</td>
+                    <td>1,000,000,000 BST</td>
+                    <td>10%</td>
+                    <td>리퀴드 기간 기존 Vesting시간만 공유</td>
+                </tr>
+                <tr>
+                    <td>하이브리드 풀</td>
+                    <td>1,000,000,000 BST</td>
+                    <td>10%</td>
+                    <td>Vesting없음, 멀티체인 스테이킹</td>
+                </tr>
+                <tr>
+                    <td>개발·팀 지원</td>
+                    <td>1,000,000,000 BST</td>
+                    <td>10%</td>
+                    <td>24개월 락업 후 24개월 순차적 Vesting해제</td>
+                </tr>
+                <tr>
+                    <td>글로벌 생태계 환경을 위한 지원</td>
+                    <td>2,000,000,000 BST</td>
+                    <td>20%</td>
+                    <td>지구를 위해 쓰이며 10년간 매년 순차적 Vesting해제</td>
+                </tr>
+                <tr>
+                    <td>커뮤니티 인센티브</td>
+                    <td>500,000,000 BST</td>
+                    <td>5%</td>
+                    <td>2년간 순차적Vesting해제</td>
+                </tr>
+                <tr>
+                    <td>예비금·파트너십</td>
+                    <td>1,000,000,000 BST</td>
+                    <td>10%</td>
+                    <td>24개월 락업 후 분할 언락</td>
+                </tr>
+                <tr>
+                    <td>DAO 거버넌스 예비</td>
+                    <td>3,000,000,000 BST</td>
+                    <td>30%</td>
+                    <td>BST생태계를 위해 DAO의 Vesting</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>4.2 Simplified Staking Tier</h3>
+        <p>
+            Softcap 세일 참여자는 다음 중 하나를 선택해 Staking을 할수 있습니다. Staking기간 동안 매일 보상이 자동 적립되며, 종료 시점에 일정 베스팅이후 원금+누적 보상이 언락됩니다.
+        </p>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Tier</th>
+                    <th>락업 기간</th>
+                    <th>일별 보상률</th>
+                    <th>최소 스테이킹</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Silver Tier</td>
+                    <td>1개월</td>
+                    <td>0.1%/일</td>
+                    <td>10,000 BST</td>
+                </tr>
+                <tr>
+                    <td>Gold Tier</td>
+                    <td>2개월</td>
+                    <td>0.2%/일</td>
+                    <td>100,000 BST</td>
+                </tr>
+                <tr>
+                    <td>Platinum Tier</td>
+                    <td>3개월</td>
+                    <td>0.3%/일</td>
+                    <td>1,000,000 BST</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            Softcap 세일 참여자는 <strong>1 USDT → 100 BST</strong> 비율로 구매하며, 락업 옵션에 따라 1~3개월 베스팅이후 매일 보상이 누적됩니다.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>5. Governance Structure</h2>
+        <h3>5.1 On-Chain Voting (BST)</h3>
+        <p>
+            거버넌스 토큰 <strong>BST</strong>를 통해, 스테이킹 규모(50%), 투표 참여도(30%), 커뮤니티 기여도(20%) 기준으로 투표권이 부여됩니다.
+        </p>
+        <h3>5.2 Progressive Decentralization Roadmap</h3>
+        <ol>
+            <li><strong>2025 Q3–Q4:</strong> 초기 거버넌스 위원회 운영</li>
+            <li><strong>2026 Q1–Q2:</strong> 커뮤니티 투표 시스템 도입</li>
+            <li><strong>2026 Q3–Q4:</strong> 부분적 DAO 전환</li>
+            <li><strong>2027 Q1+:</strong> 완전 탈중앙화 달성</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2>6. Security & Audit Framework</h2>
+        <h3>6.1 External Audit Schedule</h3>
+        <p>
+            프로토콜 보안을 위해 <strong>ICO 이후부터 단계적으로</strong> 감사 프로그램을 운영합니다.
+        </p>
+        <h3 id="formal-verification">6.2 Formal Verification</h3>
+        <p>
+            BST는 스테이킹, 보상 분배, 거버넌스 등 핵심 온체인 로직이 <strong>명세된 대로 항상 동작함</strong>을 보장하기 위해
+            형식 검증(Formal Verification)을 적용합니다. 총발행량 초과, 보상 계산 오류, 권한 남용과 같은 주요 리스크를
+            사전에 제거하도록 설계되었습니다.
+        </p>
+
+        <ul>
+            <li><strong>핵심 불변식(예시)</strong>:
+                <code>total_supply ≤ MAX_SUPPLY</code>,
+                <code>pool_balance ≥ Σ claimable_reward[u]</code>,
+                <code>staked_amount[u]</code>는 언스테이킹 전까지 감소하지 않음,
+                모든 파라미터 변경은 승인된 거버넌스 절차(제안→투표→타임락→실행)로만 가능,
+                <code>tokenized_rwa ≤ oracle_value × collateral_ratio</code>
+            </li>
+            <li><strong>검증 절차</strong>: (1) 불변식/전·후조건 명세 → (2) Rust(Anchor) 코드 어노테이션 &amp; TLA+ 등 모델링
+                → (3) SMT 솔버·모델 체커(Kani/Prusti 등) 자동 증명 → (4) 퍼징(cargo-fuzz)·유닛 테스트 병행
+                → (5) CI 파이프라인(GitHub Actions)으로 PR마다 자동 검증</li>
+        </ul>
+
+        <p class="note-box">
+            <strong>한계 고지</strong> — 형식 검증은 정의된 명세 범위 내에서만 완전성을 보장합니다.
+            오라클·오프체인 데이터, 사용자 키 관리 등은 별도의 보안 프로세스를 통해 관리되며,
+            컨트랙트 변경 시 재검증 결과를 공개 보고서로 투명하게 제공합니다.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>감사 기관</th>
+                    <th>감사 범위</th>
+                    <th>주기</th>
+                    <th>공개 방식</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>OpenZeppelin</td>
+                    <td>Core Programs</td>
+                    <td>분기별</td>
+                    <td>온체인 공개</td>
+                </tr>
+                <tr>
+                    <td>Trail of Bits</td>
+                    <td>Protocol Security</td>
+                    <td>반기별</td>
+                    <td>GitHub 공개</td>
+                </tr>
+                <tr>
+                    <td>Immunefi</td>
+                    <td>Bug Bounty</td>
+                    <td>상시</td>
+                    <td>플랫폼 연동</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3 id="insurance-integration">6.3 Insurance Integration</h3>
+        <p>
+            BST는 스마트컨트랙트 취약점, 브리지·오라클 실패 등 핵심 온체인 리스크를 완화하기 위해
+            Nexus Mutual, InsurAce 등 탈중앙 보험 프로토콜과 연계한 커버 모델을 도입합니다.
+            커버 범위·기간·프리미엄(예: 연 1~4% 수준)은 DAO 의사결정에 따라 설정되며,
+            컨트랙트 업그레이드 및 주요 파라미터 변경 시 자동으로 커버 상태가 갱신되도록 설계합니다.
+        </p>
+        <ul>
+            <li><strong>커버 범위:</strong> 스마트컨트랙트 취약점/해킹, 브리지·오라클 오류, 스테이블코인 디펙 등</li>
+            <li><strong>연계 프로토콜:</strong> Nexus Mutual(Smart Contract Cover 등), InsurAce(Smart Contract Vulnerability / De-peg Cover 등)</li>
+            <li><strong>프리미엄 &amp; 한도:</strong> 예시 기준 연 1~4% 수준(한도·기간·리스크 점수에 따라 변동)</li>
+            <li><strong>구매/유지 방식:</strong> DAO 트레저리로 기본 커버 일괄 구매 + 사용자 선택형 추가 커버 옵션 제공</li>
+            <li><strong>클레임 절차:</strong> 사고 발생 → 온체인 증빙 제출 → 보험 프로토콜 커뮤니티/심사 DAO 승인 → 보상금 분배</li>
+            <li><strong>투명성:</strong> 커버 대상·프리미엄 지출·클레임 결과를 정기 보고서로 공개하고, 거버넌스에 반영</li>
+        </ul>
+        <p class="note-box">
+            <strong>면책 및 한계</strong> — 보험 커버는 명시된 범위 내에서만 적용되며, 개인 지갑 키 유실·피싱 등 오프체인 리스크는 제외됩니다.
+            각 프로토콜의 정책 변경에 따라 커버 범위가 조정될 수 있으며, 갱신 사항은 DAO를 통해 공지됩니다.
+        </p>
+
+    </section>
+
+    <section class="section">
+        <h2>7. Yield Strategies</h2>
+        <h3>7.1 Dynamic Interest Rate</h3>
+        <p>
+            시장 상황에 따라 보상률을 자동 조정하는 모델을 사용합니다.
+        </p>
+        <div class="highlight-box">
+            <p><strong>보상률 = 기본 이율 + (총 스테이킹 비율 × 변동계수)</strong></p>
+        </div>
+        <h3>7.2 Auto-Optimization Vaults</h3>
+        <p>
+            BST는 Solana 기반 여러 디파이 프로그램을 연동해 <strong>자동 리밸런싱</strong>과 <strong>복리(재투자) 효과</strong>를 극대화하는
+            전략형 볼트를 제공합니다. 볼트 내 자산은 <strong>리퀴드 스테이킹(Liquid Staking)</strong> 토큰과
+            <strong>하이브리드 스테이킹</strong>(유동성 유지 + 고정 락업 병행) 상품을 조합하여 유동성과 수익률을 동시에 확보합니다.
+            특히 하이브리드 스테이킹은 <strong>멀티체인 스테이킹 방식</strong>을 적용하며 <strong>베스팅(Vesting)이 없어 즉시 유동성 확보가 가능</strong>하므로,
+            초기·지속 수요를 폭증시킬 것으로 기대됩니다.
+        </p>
+        <ul>
+            <li><strong>전략 엔진</strong>: APR, TVL, 슬리피지, 수수료 등 온체인 지표를 실시간 분석해 자산 비중을 자동 조정</li>
+            <li><strong>복리 구조</strong>: 주기적으로 발생한 보상을 자동 재투자하여 수익을 누적 증대</li>
+            <li><strong>리스크 관리</strong>: 오라클 이상/프로토콜 비정상 시 보수적 모드로 전환, 사전 정의된 리스크 한도 준수</li>
+            <li><strong>거버넌스 연계</strong>: 전략 변경·파라미터 수정은 DAO 제안→투표→타임락 절차로만 진행</li>
+            <li><strong>투명성</strong>: 볼트 성과, 수수료, 재투자 내역을 온체인 대시보드로 공개</li>
+            <li><strong>하이브리드 스테이킹 특징</strong>: 멀티체인 참여 가능, 베스팅 없음 → 즉시 유동성 + 높은 참여 유인</li>
+        </ul>
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>8. Banking Integration Roadmap</h2>
+        <h3>8.1 Infrastructure Development (2026 Q1–Q2)</h3>
+        <ul>
+            <li>은행 API 통합 인프라 구축</li>
+            <li>뱅킹 연계 모듈 설계 및 개발</li>
+            <li>규제 대응 프레임워크 강화</li>
+        </ul>
+        <h3>8.2 Pilot Program (2026 Q3–Q4)</h3>
+        <ul>
+            <li>선별된 파트너 은행과 베타 테스트</li>
+            <li>커스터디 서비스 연동</li>
+            <li>리스크 관리 시스템 검증</li>
+        </ul>
+        <h3>8.3 Global Rollout (2027 Q1–Q2)</h3>
+        <p>
+            글로벌 금융기관 연계를 통해 BST 예치 및 이자 지급 서비스를 정식으로 제공합니다.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>9. Risk Management</h2>
+        <h3>9.1 Collateral Parameters</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>담보 자산</th>
+                    <th>담보 비율</th>
+                    <th>청산 패널티</th>
+                    <th>최대 한도</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BTC (비트코인)</td>
+                    <td>130%</td>
+                    <td>13%</td>
+                    <td>$100M</td>
+                </tr>
+                <tr>
+                    <td>ETH (이더리움)</td>
+                    <td>150%</td>
+                    <td>15%</td>
+                    <td>$80M</td>
+                </tr>
+                <tr>
+                    <td>SOL (솔라나)</td>
+                    <td>160%</td>
+                    <td>16%</td>
+                    <td>$30M</td>
+                </tr>
+                <tr>
+                    <td>BNB (바이낸스 코인)</td>
+                    <td>170%</td>
+                    <td>17%</td>
+                    <td>$25M</td>
+                </tr>
+                <tr>
+                    <td>ADA (카르다노)</td>
+                    <td>200%</td>
+                    <td>20%</td>
+                    <td>$15M</td>
+                </tr>
+                <tr>
+                    <td>AVAX (아발란체)</td>
+                    <td>200%</td>
+                    <td>20%</td>
+                    <td>$15M</td>
+                </tr>
+                <tr>
+                    <td>LINK (체인링크)</td>
+                    <td>200%</td>
+                    <td>20%</td>
+                    <td>$10M</td>
+                </tr>
+                <tr>
+                    <td>USDC/USDT</td>
+                    <td>115%</td>
+                    <td>15%</td>
+                    <td>$50M</td>
+                </tr>
+                <tr>
+                    <td>DAI</td>
+                    <td>120%</td>
+                    <td>15%</td>
+                    <td>$50M</td>
+                </tr>
+                <tr>
+                    <td>BST-G (거버넌스 토큰)</td>
+                    <td>120%</td>
+                    <td>15%</td>
+                    <td>$50M</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>9.2 AI-Based Risk Oracle</h3>
+        <ul>
+            <li>Price Feed: Pyth Network 연동</li>
+            <li>청산 예측: 머신러닝 기반 리스크 분석</li>
+            <li>포트폴리오 위험도 평가</li>
+            <li>시장 변동성 모니터링</li>
+        </ul>
+        <h3>9.3 Emergency Protocol</h3>
+        <ol>
+            <li>Circuit Breaker: 비정상 거래 감지 시 자동 중단</li>
+            <li>Emergency Multisig: 5/7 다중 서명으로 긴급 조치</li>
+            <li>Time-Lock: 주요 변경 24-48시간 지연</li>
+            <li>Community Alert: 긴급 상황 시 커뮤니티 알림</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2>10. Conclusion</h2>
+        <p>
+            Beauty AI Protocol은 Solana 기반으로 빠른 속도와 저렴한 수수료를 제공하며, 2025년 Q3 DEX 상장을 통해 초기 유동성을 확보할 예정입니다. 이후 2026년 Q3–Q4 글로벌 은행 연계를 통해 DeFi와 전통 금융의 경계를 허물 계획입니다.
+        </p>
+        <p>
+            간소화된 스테이킹 구조와 BST에서 개발된 Ai Agent prtocol과 마스터 LLM 기반 자동화 시스템, 구체적인 거버넌스 로드맵을 통해 신뢰성과 지속 가능성을 보장합니다. BST는 단순 토큰을 넘어 뉴 노멀 시대에 차세대 금융 인프라로 성장할 것입니다.
+        </p>
+        <div class="highlight-box">
+            <h4>투자 권장사항</h4>
+            <p><strong>등급:</strong> Strong Buy<br>
+                <strong>위험도:</strong> Medium-Low<br>
+                <strong>권장 포트폴리오 비중:</strong> 5–15%</p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 Beauty AI Protocol (BST). All rights reserved.</p>
+        <p>본 백서는 정보 제공용입니다. 투자 조언으로 해석하지 마십시오.</p>
+        <p>버전 1.0 | 최종 업데이트: 2025년 6월2</p>
+    </div>
+
+</div>
+</body>
+</html>
