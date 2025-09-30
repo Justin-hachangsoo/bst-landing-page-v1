@@ -148,7 +148,7 @@
   </footer>
   
   <script>
-    // 🎯 핵심 해결책: 페이지 로딩과 동시에 실행
+    // 🎯 핵심 해결책: 페이지 로딩과 동시에 실행 (스크롤 고정 로직 유지)
     (function() {
       // 즉시 최상단 고정
       window.scrollTo(0, 0);
@@ -187,17 +187,19 @@
       }
     });
 
-    // (1) 언어별 텍스트사전
+    // (1) 언어별 텍스트사전 (Connect button text corrected)
     const translations = {
       ko: {
         navWallet: '지갑 연결',
         navWhitepaper: '백서',
         heroSubtitle: 'Solana 기반 RWA 연계 하이브리드 스테이킹 시스템으로, 실물 K-Beauty 비즈니스와 연결된 혁신적인 디지털 자산.',
-        connectBtn: '지갑 연결',
+        // New/Corrected ID for Hero Connect button
+        btnHeroConnect: '지갑 연결', 
         viewWhitepaper: '백서 보기',
         secWalletTitle: '코인 지갑 연결',
         secWalletDesc: '다음 버튼을 클릭하여 Phantom 지갑 등 Solana 지갑을 연결하세요.',
-        walletConnect: '지갑 연결하기',
+        // Corrected key to match the element ID
+        walletConnect: '지갑 연결', 
         secWhitepaperTitle: '백서',
         secExplorerTitle: 'Solana Explorer',
         footerText: '© 2025 BeautySkin ai Token. All rights reserved.'
@@ -206,10 +208,12 @@
         navWallet: 'Connect Wallet',
         navWhitepaper: 'Whitepaper',
         heroSubtitle: 'Solana-based RWA-linked hybrid staking system, an innovative digital asset connecting real-world K-Beauty business.',
-        connectBtn: 'Connect Wallet',
+        // New/Corrected ID for Hero Connect button
+        btnHeroConnect: 'Connect Wallet',
         viewWhitepaper: 'View Whitepaper',
         secWalletTitle: 'Connect Wallet',
         secWalletDesc: 'Click the button below to connect your Phantom or other Solana wallet.',
+        // Corrected key to match the element ID
         walletConnect: 'Connect Wallet',
         secWhitepaperTitle: 'Whitepaper',
         secExplorerTitle: 'Solana Explorer',
@@ -217,25 +221,30 @@
       }
     };
     
-    // (2) 언어 전환 함수
+    // (2) 언어 전환 함수 (Whitepaper iframe src updated)
     function setLanguage(lang) {
       document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
       document.body.dataset.lang = lang;
       const t = translations[lang];
+
       document.getElementById('nav-wallet').innerText       = t.navWallet;
       document.getElementById('nav-whitepaper').innerText   = t.navWhitepaper;
       document.getElementById('hero-subtitle').innerText    = t.heroSubtitle;
-      document.getElementById('connect-btn').innerText      = t.connectBtn;
+      // 🌟 Corrected: Update the text for the hero connect button
+      document.getElementById('btn-hero-connect').innerText   = t.btnHeroConnect; 
       document.getElementById('btn-view-whitepaper').innerText = t.viewWhitepaper;
       document.getElementById('sec-wallet-title').innerText = t.secWalletTitle;
       document.getElementById('sec-wallet-desc').innerText  = t.secWalletDesc;
-      document.getElementById('wallet-connect').innerText   = t.walletConnect;
+      // 🌟 Corrected: The actual wallet connect button in the wallet section
+      document.getElementById('wallet-connect').innerText   = t.walletConnect; 
       document.getElementById('sec-whitepaper-title').innerText = t.secWhitepaperTitle;
       document.getElementById('sec-explorer-title').innerText   = t.secExplorerTitle;
       document.getElementById('footer-text').innerText      = t.footerText;
+      
+      // 🌟 The core fix: Update the iframe source based on the language
       document.getElementById('wp-frame').src               = lang === 'en'
-        ? 'BST2025_V1_en.html'
-        : 'BST2025_V1.html';
+        ? 'BST2025_V1_en.html' // Assumes you have an English whitepaper file
+        : 'BST2025_V1.html'; // Korean whitepaper file
     }
     
     // (3) 🌐 드롭다운 토글 & 언어 선택
@@ -247,10 +256,12 @@
     document.getElementById('lang-ko').addEventListener('click', () => {
       setLanguage('ko');
       langMenu.classList.add('hidden');
+      localStorage.setItem('lang', 'ko'); // Save preference
     });
     document.getElementById('lang-en').addEventListener('click', () => {
       setLanguage('en');
       langMenu.classList.add('hidden');
+      localStorage.setItem('lang', 'en'); // Save preference
     });
     document.addEventListener('click', e => {
       if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
@@ -261,25 +272,24 @@
     // (4) 초기 언어 읽어오기 (localStorage)
     const initialLang = localStorage.getItem('lang') || 'ko';
     setLanguage(initialLang);
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('lang', document.body.dataset.lang);
-    });
     
     // (5) Phantom Wallet 연결 버튼
     document.getElementById('wallet-connect').addEventListener('click', async () => {
       if (window.solana && window.solana.isPhantom) {
         try {
           const resp = await window.solana.connect();
-          alert((document.documentElement.lang === 'en' ? 'Wallet connected: ' : '지갑 연결됨: ') + resp.publicKey.toString());
+          alert((document.body.dataset.lang === 'en' ? 'Wallet connected: ' : '지갑 연결됨: ') + resp.publicKey.toString());
         } catch (err) {
           console.error(err);
-          alert(document.documentElement.lang === 'en' ? 'Failed to connect wallet.' : '지갑 연결에 실패했습니다.');
+          alert(document.body.dataset.lang === 'en' ? 'Failed to connect wallet.' : '지갑 연결에 실패했습니다.');
         }
       } else {
-        alert(document.documentElement.lang === 'en' ? 'Please install Phantom Wallet.' : 'Phantom 지갑을 설치해주세요.');
+        alert(document.body.dataset.lang === 'en' ? 'Please install Phantom Wallet.' : 'Phantom 지갑을 설치해주세요.');
       }
     });
+
   </script>
 </body>
 </html>
+
 
