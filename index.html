@@ -99,7 +99,9 @@
         <h1 id="hero-title" class="text-4xl md:text-5xl font-bold mb-4">BST (BeautySkin ai Token)</h1>
         <p id="hero-subtitle" class="mb-6">Solana 기반 RWA 연계 하이브리드 스테이킹 시스템으로, 실물 K-Beauty 비즈니스와 연결된 혁신적인 디지털 자산.</p>
         <div class="space-x-4">
-	   <a href="https://bst.beauty/" target="blank" class="bg-white text-black font-semibold px-6 py-2 rounded shadow hover:bg-gray-100" >지갑 연결</a>
+	   <a href="https://bst.beauty/" target="blank" class="bg-white text-black font-semibold px-6 py-2 rounded shadow hover:bg-gray-100" >
+    <span id="btn-hero-connect">지갑 연결</span>
+</a>
           <a href="#whitepaper" id="btn-view-whitepaper" class="bg-transparent border border-white px-6 py-2 rounded hover:bg-white hover:text-black">백서 보기</a>
         </div>
       </div>
@@ -115,7 +117,9 @@
       <h2 id="sec-wallet-title" class="text-2xl font-bold mb-4">코인 지갑 연결</h2>
       <p id="sec-wallet-desc" class="mb-6">다음 버튼을 클릭하여 Phantom 지갑 등 Solana 지갑을 연결하세요.</p>
       
-      <a href="https://bst.beauty/" target="blank"  id="wallet-connect" class="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700">지갑 연결</a>
+      <a href="https://bst.beauty/" target="blank" class="bg-white text-black font-semibold px-6 py-2 rounded shadow hover:bg-gray-100" >
+    <span id="btn-hero-connect">지갑 연결</span>
+</a>
     </div>
   </section>
 
@@ -187,83 +191,109 @@
       }
     });
 
-    // (1) 언어별 텍스트사전 (Connect button text corrected)
+    // (1) 언어별 텍스트사전
     const translations = {
       ko: {
-        navWallet: '지갑 연결',
+        navWallet: '지갑', 
         navWhitepaper: '백서',
         heroSubtitle: 'Solana 기반 RWA 연계 하이브리드 스테이킹 시스템으로, 실물 K-Beauty 비즈니스와 연결된 혁신적인 디지털 자산.',
-        // New/Corrected ID for Hero Connect button
-        btnHeroConnect: '지갑 연결', 
+        btnHeroConnect: '지갑 연결', // Hero 섹션의 연결 버튼 텍스트
         viewWhitepaper: '백서 보기',
         secWalletTitle: '코인 지갑 연결',
         secWalletDesc: '다음 버튼을 클릭하여 Phantom 지갑 등 Solana 지갑을 연결하세요.',
-        // Corrected key to match the element ID
-        walletConnect: '지갑 연결', 
+        walletConnect: '지갑 연결', // Wallet 섹션의 연결 버튼 텍스트
         secWhitepaperTitle: '백서',
         secExplorerTitle: 'Solana Explorer',
         footerText: '© 2025 BeautySkin ai Token. All rights reserved.'
       },
       en: {
-        navWallet: 'Connect Wallet',
+        navWallet: 'Wallet',
         navWhitepaper: 'Whitepaper',
         heroSubtitle: 'Solana-based RWA-linked hybrid staking system, an innovative digital asset connecting real-world K-Beauty business.',
-        // New/Corrected ID for Hero Connect button
-        btnHeroConnect: 'Connect Wallet',
+        btnHeroConnect: 'Connect Wallet', // Hero 섹션의 연결 버튼 텍스트
         viewWhitepaper: 'View Whitepaper',
         secWalletTitle: 'Connect Wallet',
         secWalletDesc: 'Click the button below to connect your Phantom or other Solana wallet.',
-        // Corrected key to match the element ID
-        walletConnect: 'Connect Wallet',
+        walletConnect: 'Connect Wallet', // Wallet 섹션의 연결 버튼 텍스트
         secWhitepaperTitle: 'Whitepaper',
         secExplorerTitle: 'Solana Explorer',
         footerText: '© 2025 BeautySkin ai Token. All rights reserved.'
       }
     };
     
-    // (2) 언어 전환 함수 (Whitepaper iframe src updated)
+    // (2) 언어 전환 함수 (Null 오류 방지 및 Whitepaper iframe src 업데이트 포함)
     function setLanguage(lang) {
       document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
       document.body.dataset.lang = lang;
       const t = translations[lang];
 
-      document.getElementById('nav-wallet').innerText       = t.navWallet;
-      document.getElementById('nav-whitepaper').innerText   = t.navWhitepaper;
-      document.getElementById('hero-subtitle').innerText    = t.heroSubtitle;
-      // 🌟 Corrected: Update the text for the hero connect button
-      document.getElementById('btn-hero-connect').innerText   = t.btnHeroConnect; 
-      document.getElementById('btn-view-whitepaper').innerText = t.viewWhitepaper;
-      document.getElementById('sec-wallet-title').innerText = t.secWalletTitle;
-      document.getElementById('sec-wallet-desc').innerText  = t.secWalletDesc;
-      // 🌟 Corrected: The actual wallet connect button in the wallet section
-      document.getElementById('wallet-connect').innerText   = t.walletConnect; 
-      document.getElementById('sec-whitepaper-title').innerText = t.secWhitepaperTitle;
-      document.getElementById('sec-explorer-title').innerText   = t.secExplorerTitle;
-      document.getElementById('footer-text').innerText      = t.footerText;
+      // ⭐️ 오류 방지: 존재하지 않는 요소를 시도하기 전에 확인합니다.
+      // 이전에 오류가 났을 가능성이 높은 'btn-hero-connect'를 포함한 모든 요소를 안전하게 처리합니다.
       
-      // 🌟 The core fix: Update the iframe source based on the language
-      document.getElementById('wp-frame').src               = lang === 'en'
-        ? 'BST2025_V1_en.html' // Assumes you have an English whitepaper file
-        : 'BST2025_V1.html'; // Korean whitepaper file
+      const elementsToUpdate = [
+        { id: 'nav-wallet', text: t.navWallet },
+        { id: 'nav-whitepaper', text: t.navWhitepaper },
+        { id: 'hero-subtitle', text: t.heroSubtitle },
+        { id: 'btn-hero-connect', text: t.btnHeroConnect }, // Hero 섹션 연결 버튼 (span)
+        { id: 'btn-view-whitepaper', text: t.viewWhitepaper },
+        { id: 'sec-wallet-title', text: t.secWalletTitle },
+        { id: 'sec-wallet-desc', text: t.secWalletDesc },
+        { id: 'wallet-connect', text: t.walletConnect }, // Wallet 섹션 연결 버튼
+        { id: 'sec-whitepaper-title', text: t.secWhitepaperTitle },
+        { id: 'sec-explorer-title', text: t.secExplorerTitle },
+        { id: 'footer-text', text: t.footerText },
+      ];
+      
+      elementsToUpdate.forEach(item => {
+        const element = document.getElementById(item.id);
+        if (element) {
+          element.innerText = item.text;
+        } else {
+          // 💡 디버깅 팁: 어떤 요소가 누락되었는지 확인
+          // console.warn(`Element with ID '${item.id}' not found.`);
+        }
+      });
+      
+      // 🌟 핵심 해결책: Whitepaper iframe src 업데이트
+      const wpFrame = document.getElementById('wp-frame');
+      if (wpFrame) {
+          wpFrame.src = lang === 'en'
+            ? 'BST2025_V1_en.html' // 영문 백서 파일
+            : 'BST2025_V1.html'; // 한국어 백서 파일
+      }
     }
     
     // (3) 🌐 드롭다운 토글 & 언어 선택
     const langToggle = document.getElementById('lang-toggle');
     const langMenu   = document.getElementById('lang-menu');
-    langToggle.addEventListener('click', () => {
-      langMenu.classList.toggle('hidden');
-    });
-    document.getElementById('lang-ko').addEventListener('click', () => {
-      setLanguage('ko');
-      langMenu.classList.add('hidden');
-      localStorage.setItem('lang', 'ko'); // Save preference
-    });
-    document.getElementById('lang-en').addEventListener('click', () => {
-      setLanguage('en');
-      langMenu.classList.add('hidden');
-      localStorage.setItem('lang', 'en'); // Save preference
-    });
+    
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+          langMenu.classList.toggle('hidden');
+        });
+    }
+    
+    const langKo = document.getElementById('lang-ko');
+    const langEn = document.getElementById('lang-en');
+    
+    if (langKo) {
+        langKo.addEventListener('click', () => {
+          setLanguage('ko');
+          langMenu.classList.add('hidden');
+          localStorage.setItem('lang', 'ko'); // Save preference
+        });
+    }
+    
+    if (langEn) {
+        langEn.addEventListener('click', () => {
+          setLanguage('en');
+          langMenu.classList.add('hidden');
+          localStorage.setItem('lang', 'en'); // Save preference
+        });
+    }
+
     document.addEventListener('click', e => {
+      if (!langToggle || !langMenu) return; // 요소가 없으면 실행 중지
       if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
         langMenu.classList.add('hidden');
       }
@@ -274,22 +304,33 @@
     setLanguage(initialLang);
     
     // (5) Phantom Wallet 연결 버튼
-    document.getElementById('wallet-connect').addEventListener('click', async () => {
-      if (window.solana && window.solana.isPhantom) {
-        try {
-          const resp = await window.solana.connect();
-          alert((document.body.dataset.lang === 'en' ? 'Wallet connected: ' : '지갑 연결됨: ') + resp.publicKey.toString());
-        } catch (err) {
-          console.error(err);
-          alert(document.body.dataset.lang === 'en' ? 'Failed to connect wallet.' : '지갑 연결에 실패했습니다.');
-        }
-      } else {
-        alert(document.body.dataset.lang === 'en' ? 'Please install Phantom Wallet.' : 'Phantom 지갑을 설치해주세요.');
-      }
-    });
-
+    const walletConnectButton = document.getElementById('wallet-connect');
+    if (walletConnectButton) {
+        walletConnectButton.addEventListener('click', async (e) => {
+            // e.preventDefault()는 Wallet 섹션의 버튼(wallet-connect)이 
+            // 실제 Phantom 연결 로직을 실행하도록 할 때 주석 해제해야 합니다.
+            // 현재 코드는 <a href="https://bst.beauty/">로 이동하도록 되어 있어,
+            // 이 버튼을 API 연결용으로 사용하려면 e.preventDefault()를 반드시 사용해야 합니다.
+            e.preventDefault(); 
+            
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    const resp = await window.solana.connect();
+                    alert((document.body.dataset.lang === 'en' ? 'Wallet connected: ' : '지갑 연결됨: ') + resp.publicKey.toString());
+                } catch (err) {
+                    console.error(err);
+                    alert(document.body.dataset.lang === 'en' ? 'Failed to connect wallet.' : '지갑 연결에 실패했습니다.');
+                }
+            } else {
+                alert(document.body.dataset.lang === 'en' ? 'Please install Phantom Wallet.' : 'Phantom 지갑을 설치해주세요.');
+                // Phantom 지갑 설치 페이지로 이동시키려면
+                // window.open('https://phantom.app/', '_blank');
+            }
+        });
+    }
   </script>
 </body>
 </html>
+
 
 
